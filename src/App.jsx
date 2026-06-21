@@ -9,7 +9,7 @@ function App() {
   ]);
 
   const addTodo = (text) => {
-    const newTodo = { id: Date.now(), text, completed: false, priority: "low" };
+    const newTodo = { id: Date.now(), text, completed: false, priority: "high" };
     setTodos([...todos, newTodo]);
   };
 
