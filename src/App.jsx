@@ -5,11 +5,11 @@ import "./App.css";
 
 function App() {
   const [todos, setTodos] = useState([
-    { id: 1, text: "Learn React", completed: false },
+    { id: 1, text: "Learn React", completed: false, priority: "medium" },
   ]);
 
   const addTodo = (text) => {
-    const newTodo = { id: Date.now(), text, completed: false };
+    const newTodo = { id: Date.now(), text, completed: false, priority: "low" };
     setTodos([...todos, newTodo]);
   };
 
@@ -33,14 +33,26 @@ function App() {
     );
   };
 
+  const setPriority = (id, priority) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, priority } : todo
+      )
+    );
+  };
+
+  const completedCount = todos.filter(todo => todo.completed).length
+
   return (
     <div className="app-container">
+      <p>Completed: {completedCount} / {todos.length}</p>
       <Header onAdd={addTodo} />
       <ToDoList
         todos={todos}
         onDelete={deleteTodo}
         onToggle={toggleComplete}
         onEdit={editTodo}
+        onPriority={setPriority}
       />
     </div>
   );
